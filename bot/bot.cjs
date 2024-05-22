@@ -6,11 +6,11 @@ const faq = require("./messages/duvidas.cjs");
 const contatos = require("./messages/contatos.cjs");
 const infoEntregas = require("./messages/entregas.cjs");
 const sugestoes = require("./messages/sugestoes.cjs");
-const creditos = require("./messages/creditos.cjs")
 const qrcode = require("qrcode-terminal");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
 const genAI = new GoogleGenerativeAI(process.env.WHATSAPP_API_GEMINI);
+const creditos = require("./messages/creditos.cjs")
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -42,7 +42,7 @@ const menuInicial = () => {
     *8. 📢 Reclamações e Sugestões*
     *9. 🍳Receitas e Dicas de Cozinha*
     *10. 🙍🏻 Para falar com atendimento digite atendimento.*
-    *11.👨‍💻 Digite creditos para ver s creditos*
+    *11.👨‍💻 Digite creditos para ver os creditos*
     *Desejamos boas compras! Se precisar de qualquer outra coisa, estou aqui para ajudar!*`;
     
 

@@ -10,4 +10,3 @@ Menu de Administração:
 8. Feedback e Melhoria 📝
 9. Sair 🚪
 `;
-

@@ -1,4 +1,4 @@
-const { Client, LocalAuth } = require("whatsapp-web.js");
+const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
 const listaProdutos = require("./messages/listaProdutos");
 const horarioFuncionamento = require("./messages/horariosFuncionamento.cjs");
 const locacaliao = require("./messages/localizao.cjs");
@@ -31,7 +31,7 @@ client.on("qr", (qr) => {
 
 const menuInicial = () => {
   client.on("message", (msg) => {
-    const menu = `*🤖 Olá! Eu sou a inteligência artificial do supermercado popular, aqui para ajudar a tirar todas as suas dúvidas e facilitar suas compras. Como posso ajudar você hoje?*
+    const menu = `*🤖 Olá! Eu sou o bot supermercado popular, aqui para ajudar a tirar todas as suas dúvidas e facilitar suas compras. Como posso ajudar você hoje?*
     *1. 🛒 Lista de Produtos*
     *2. 📉 Produtos em Promoção*
     *3. 🕒 Horário de Funcionamento*

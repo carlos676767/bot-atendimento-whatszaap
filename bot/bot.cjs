@@ -6,6 +6,7 @@ const faq = require("./messages/duvidas.cjs");
 const contatos = require("./messages/contatos.cjs");
 const infoEntregas = require("./messages/entregas.cjs");
 const sugestoes = require("./messages/sugestoes.cjs");
+const creditos = require("./messages/creditos.cjs")
 const qrcode = require("qrcode-terminal");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
@@ -41,7 +42,10 @@ const menuInicial = () => {
     *8. 📢 Reclamações e Sugestões*
     *9. 🍳Receitas e Dicas de Cozinha*
     *10. 🙍🏻 Para falar com atendimento digite atendimento.*
+    *11.👨‍💻 Digite creditos para ver s creditos*
     *Desejamos boas compras! Se precisar de qualquer outra coisa, estou aqui para ajudar!*`;
+    
+
     if (msg.body === "oi" || msg.body === "Oi") {
       const mensagem = msg.from.replace(/@\w+\.us/g, "")
        enviarNumeroAtendimento(mensagem);
@@ -179,6 +183,13 @@ const exibirReceitas = () => {
   });
 };
 
+const creditosBot = () => {
+  client.on("message", (msg) => {
+    if (msg.body === "creditos") {
+      msg.reply(creditos)
+    }
+  })
+}
 
 menuInicial();
 opcoes();
@@ -189,4 +200,5 @@ contato();
 servicosDeEntrega();
 sugestions();
 exibirReceitas();
+creditosBot()
 client.initialize();

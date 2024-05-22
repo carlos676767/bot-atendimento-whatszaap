@@ -1,0 +1,101 @@
+{
+  "AlimentoseBebidas": {
+    "FrioseLticínios": [
+      {"nome": "Leite", "valor": "4.50R$", "emoji": "🥛"},
+      {"nome": "Queijo", "valor":"12.00KG", "emoji": "🧀"},
+      {"nome": "Iogurte", "valor": "3.00R$", "emoji": "🥤"},
+      {"nome": "Manteiga", "valor": "6.00R$", "emoji": "🧈"},
+      {"nome": "Requeijão", "valor": "5.50R$", "emoji": "🥣"},
+      {"nome": "Creme de Leite", "valor": "4.00R$", "emoji": "🥛"},
+      {"nome": "Leite Condensado", "valor": "3.50R$", "emoji": "🥫"},
+      {"nome": "Ricota", "valor": "8.00KG", "emoji": "🧀"},
+      {"nome": "Mussarela", "valor": "14.00KG", "emoji": "🧀"},
+      {"nome": "Presunto", "valor": "10.00KG", "emoji": "🥓"}
+    ],
+    "Carnes": [
+      {"nome": "Carne Bovina", "valor": "25.00KG", "emoji": "🥩"},
+      {"nome": "Frango", "valor":"8.00KG", "emoji": "🍗"},
+      {"nome": "Peixe", "valor": "20.00KG", "emoji": "🐟"},
+      {"nome": "Carne Suína", "valor": "18.00KG", "emoji": "🍖"},
+      {"nome": "Salsicha", "valor": "12.00KG", "emoji": "🌭"},
+      {"nome": "Bacon", "valor": "22.00KG", "emoji": "🥓"},
+      {"nome": "Carne Moída", "valor": "19.00KG", "emoji": "🥩"},
+      {"nome": "Linguiça", "valor": "16.00KG", "emoji": "🌭"},
+      {"nome": "Camarão", "valor": "30.00KG", "emoji": "🦐"},
+      {"nome": "Carne de Cordeiro", "valor": "35.00KG", "emoji": "🍖"}
+    ],
+    "Hortifruti": [
+      {"nome": "Maçã", "valor": "6.00KG", "emoji": "🍎"},
+      {"nome": "Cenoura", "valor": "4.00KG", "emoji": "🥕"},
+      {"nome": "Banana", "valor": "5.00KG", "emoji": "🍌"},
+      {"nome": "Tomate", "valor": "6.00KG", "emoji": "🍅"},
+      {"nome": "Alface", "valor":"3.00KG", "emoji": "🥬"},
+      {"nome": "Batata", "valor": "7.00KG", "emoji": "🥔"},
+      {"nome": "Cebola", "valor": "4.00KG", "emoji": "🧅"},
+      {"nome": "Laranja", "valor": "8.00KG", "emoji": "🍊"},
+      {"nome": "Pimentão", "valor": "5.00KG", "emoji": "🌶️"},
+      {"nome": "Abacate", "valor": "10.00KG", "emoji": "🥑"}
+    ],
+    "Padaria": [
+      {"nome": "Pão", "valor": "3.00KG", "emoji": "🍞"},
+      {"nome": "Bolo", "valor": "20.00KG", "emoji": "🍰"},
+      {"nome": "Croissant", "valor": "5.00KG", "emoji": "🥐"},
+      {"nome": "Pão de Queijo", "valor":"6.00KG" , "emoji": "🧀"},
+      {"nome": "Torta", "valor": "25.00KG", "emoji": "🥧"},
+      {"nome": "Biscoito", "valor": "4.00KG", "emoji": "🍪"},
+      {"nome": "Rosquinha", "valor": "7.00KG", "emoji": "🍩"},
+      {"nome": "Muffin", "valor": "8.00KG", "emoji": "🧁"},
+      {"nome": "Pão Integral", "valor": "4.50kg", "emoji": "🍞"},
+      {"nome": "Donuts", "valor": "9.00kg", "emoji": "🍩"}
+    ],
+    "Bebidas": [
+      {"nome": "Água", "valor": "2.00R$", "emoji": "💧"},
+      {"nome": "Suco", "valor": "5.00R$", "emoji": "🧃"},
+      {"nome": "Refrigerante", "valor": "4.00R$", "emoji": "🥤"},
+      {"nome": "Cerveja", "valor": "4.00R$", "emoji": "🍺"},
+      {"nome": "Vinho", "valor": "30.00R$", "emoji": "🍷"},
+      {"nome": "Café", "valor": "15.00R$", "emoji": "☕"},
+      {"nome": "Chá", "valor": "10.00R$", "emoji": "🍵"},
+      {"nome": "Energetico", "valor": "8.00R$", "emoji": "🥤"},
+      {"nome": "Leite de Coco", "valor":"7.00R$", "emoji": "🥥"},
+      {"nome": "Água de Coco", "valor":"5.00R$", "emoji": "🥥"}
+    ],
+    "EnlatadoseConservas": [
+      {"nome": "Feijão Enlatado", "valor": "9.99R$", "emoji": "🥫"},
+      {"nome": "Milho Enlatado", "valor": "4.00R$", "emoji": "🌽"},
+      {"nome": "Ervilha Enlatada", "valor": "3.00R$", "emoji": "🥫"},
+      {"nome": "Sardinha Enlatada", "valor":"1.00R$" , "emoji": "🐟"},
+      {"nome": "Atum Enlatado", "valor": "R$6.00", "emoji": "🐟"},
+      {"nome": "Tomate Pelado", "valor": "4.50R$", "emoji": "🍅"},
+      {"nome": "Palmito", "valor": "7.00R$", "emoji": "🥫"},
+      {"nome": "Pepino em Conserva", "valor": "4.00R$", "emoji": "🥒"},
+      {"nome": "Azeitonas", "valor": "5.50R$", "emoji": "🫒"},
+      {"nome": "Picles", "valor": "3.50R$", "emoji": "🥒"}
+    ],
+    "CereaiseGrãos": [
+      {"nome": "Arroz", "valor": "10.00R$", "emoji": "🍚"},
+      {"nome": "Feijão", "valor": "8.00R$", "emoji": "🌰"},
+      {"nome": "Lentilha", "valor": "6.00R$", "emoji": "🌱"},
+      {"nome": "Grão de Bico", "valor": "19.00R$", "emoji": "🌱"},
+      {"nome": "Farinha de Trigo", "valor": "4.00R$", "emoji": "🌾"},
+      {"nome": "Aveia", "valor": "5.00R$", "emoji": "🌾"},
+      {"nome": "Quinoa", "valor": "25.99R$", "emoji": "🌾"},
+      {"nome": "Milho de Pipoca", "valor": "3.00R$", "emoji": "🌽"},
+      {"nome": "Cevada", "valor": "7.00R$", "emoji": "🌾"},
+      {"nome": "Trigo", "valor":"6.00R$", "emoji": "🌾"}
+    ],
+    "Massas": [
+      {"nome": "Macarrão", "valor": "5.00R$", "emoji": "🍝"},
+      {"nome": "Lasanha", "valor": "15.00R$", "emoji": "🍲"},
+      {"nome": "Espaguete", "valor": "16.00KG", "emoji": "🍝"},
+      {"nome": "Nhoque", "valor":"10.00R$", "emoji": "🍲"},
+      {"nome": "Talharim", "valor": "7.00R$", "emoji": "🍝"},
+      {"nome": "Ravioli", "valor": "12.00KG", "emoji": "🍝"},
+      {"nome": "Canelone", "valor": "14.00R$", "emoji": "🍝"},
+      {"nome": "Fusilli", "valor": "8.00R$", "emoji": "🍝"},
+      {"nome": "Penne", "valor": "9.00R$", "emoji": "🍝"}
+    ]
+  }
+}
+
+

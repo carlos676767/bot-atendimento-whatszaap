@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produto em Promoção</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cadastro de Produto em Promoção</h1>
+
+        <div class="form-group">
+            <label for="productName"><i class="fa-solid fa-house"></i> nome do Produto</label>
+            <input type="text" id="productName" name="productName" required>
+        </div>
+        <div class="form-group">
+            <label for="productPrice"><i class="fa-solid fa-money-bill"></i> Valor produto</label>
+            <input type="number" id="productPrice" name="productPrice" min="0" step="0.01" required>
+        </div>
+        <button type="submit" class="botaoCadastrar">Cadastrar Produto</button>
+        <button>Deletar</button>
+
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

@@ -7,9 +7,8 @@ fast.post("/produtos", function dados(requst, msg) {
   console.log(dadosFrontEnd);
 });
 
-module.exports = dadosFrontEnd;
-
-fast.listen({ port: 8001 }, (err) => {
+module.exports = dadosFrontEnd
+fast.listen({ port: 5000 }, (err) => {
   if (err) {
     fast.log.error(err);
     process.exit(1);

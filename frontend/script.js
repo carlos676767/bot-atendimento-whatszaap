@@ -10,7 +10,7 @@ const enviarDadosApi = async () => {
       valorProduto: productPrice.value,
     };
     try {
-      const data = await fetch("http://localhost:8001/produtos", {
+      const data = await fetch("http://localhost:5000/produtos", {
         method: "POST",
         body: JSON.stringify(dadosProduto),
       });
@@ -39,3 +39,5 @@ const botaoCadastrar = document.querySelector(".botaoCadastrar");
 botaoCadastrar.addEventListener("click", () => {
   enviarDadosApi();
 });
+
+

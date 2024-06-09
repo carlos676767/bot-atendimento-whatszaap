@@ -1,16 +1,18 @@
 const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
 const listaProdutos = require("./messages/listaProdutos");
-const horarioFuncionamento = require("./messages/horariosFuncionamento.cjs");
-const locacaliao = require("./messages/localizao.cjs");
-const faq = require("./messages/duvidas.cjs");
-const contatos = require("./messages/contatos.cjs");
-const infoEntregas = require("./messages/entregas.cjs");
-const sugestoes = require("./messages/sugestoes.cjs");
+const horarioFuncionamento = require("./messages/horariosFuncionamento.js");
+const locacaliao = require("./messages/localizao.js");
+const faq = require("./messages/duvidas.js");
+const contatos = require("./messages/contatos.js");
+const infoEntregas = require("./messages/entregas.js");
+const sugestoes = require("./messages/sugestoes.js");
 const qrcode = require("qrcode-terminal");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
 const genAI = new GoogleGenerativeAI(process.env.WHATSAPP_API_GEMINI);
-const creditos = require("./messages/creditos.cjs");
+const creditos = require("./messages/creditos.js");
+const adm = require("./messages/admin/admin.cjs");
+const dataBase = require("../db/mongo.js");
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -210,6 +212,27 @@ const creditosBot = () => {
   });
 };
 
+const menuAdmin = () => {
+  client.on("message", (msg) => {
+    if (msg.body == process.env.SENHAADMIN) {
+      msg.reply(adm);
+      client.once("message", async (message) => {
+        if (message.body.includes("add")) {
+          enviarProdutosDataBase(message);
+        }
+      });
+    }
+  });
+};
+
+const enviarProdutosDataBase = async (message) => {
+  const pegarMnesagem = await message.getChat();
+  const { body } = pegarMnesagem.lastMessage;
+  const novaStr = body.slice(4, Infinity).split(" ");
+  await dataBase(novaStr[1], novaStr[2]);
+  message.reply("Produtos adicionados na database");
+};
+
 menuInicial();
 opcoes();
 diasDefuncionamento();
@@ -220,4 +243,5 @@ servicosDeEntrega();
 sugestions();
 exibirReceitas();
 creditosBot();
+menuAdmin();
 client.initialize();

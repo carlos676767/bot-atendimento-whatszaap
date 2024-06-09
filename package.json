@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "@google/generative-ai": "^0.11.3",
+    "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "fastify": "^4.27.0",
     "json-server": "^1.0.0-beta.0",
     "mongodb": "^6.6.2",

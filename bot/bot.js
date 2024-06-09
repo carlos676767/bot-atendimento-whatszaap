@@ -222,7 +222,7 @@ const menuAdmin = () => {
           return;
         }
         if (message.body.includes("clean")) {
-          cleanDatabase();
+          await cleanDatabase(message);
           return;
         }
       });

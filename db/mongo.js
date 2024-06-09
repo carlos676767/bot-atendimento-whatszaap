@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const mensagemDadosApagados = require("../bot/messages/admin/mensagemCleanBase");
 const url = "mongodb+srv://admin:admin1234@dados.7d94myt.mongodb.net/";
 const novaConexao = new MongoClient(url, {
   useNewUrlParser: true,
@@ -23,16 +24,18 @@ const newDadosDataBase = async (produto, valor) => {
     const collection = await database.collection("produtos");
     await collection.insertOne({ produto: produto, valor: valor});
   } catch (error) {
-    console.error("Datababase impossible itens add")
+    console.error("DataBase impossible itens add")
   }
 };
 
-const cleanDatabase = async () => {
+const cleanDatabase = async (msg) => {
   try {
     const database = await connectDataBase();
     const collectionDrop = await database.collection("produtos").drop();
     console.log("delete sucess database itens")
-  } catch (error) {
+    msg.reply(mensagemDadosApagados)
+    return msg
+    } catch (error) {
     console.error("error delete database");
   }
 };

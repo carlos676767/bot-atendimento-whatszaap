@@ -1,3 +1,5 @@
+const axios = require("axios")
+
 const array = [];
 const listarProdutos = async () => {
   try {

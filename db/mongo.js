@@ -4,19 +4,28 @@ const novaConexao = new MongoClient(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-const dataBaseName = "produtos";
 
-const abrirBancoDeDados = async (produto, valor) => {
+const dataBaseName = "produtos";
+const connectDataBase = async () => {
   try {
     await novaConexao.connect();
-    console.log("database conectada");
     const db = novaConexao.db(dataBaseName);
-    const collection = db.collection("produtos");
-   await collection.insertOne({produto: produto, valor: valor})
-    console.log("connect");
+    console.log("database connect");
+    return db
   } catch (error) {
-    console.log(error);
+    console.error(`Database error connect from mongodb`);
   }
 };
 
-module.exports = abrirBancoDeDados
+const newDadosDataBase = async (produto, valor) => {
+  try {
+    const database = await connectDataBase()
+    const collection = await database.collection("produtos");
+    await collection.insertOne({ produto: produto, valor: valor});
+  } catch (error) {
+    console.error("Datababase impossible itens add")
+  }
+};
+
+
+module.exports = {newDadosDataBase}

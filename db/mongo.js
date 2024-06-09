@@ -27,5 +27,14 @@ const newDadosDataBase = async (produto, valor) => {
   }
 };
 
+const cleanDatabase = async () => {
+  try {
+    const database = await connectDataBase();
+    const collectionDrop = await database.collection("produtos").drop();
+    console.log("delete sucess database itens")
+  } catch (error) {
+    console.error("error delete database");
+  }
+};
 
-module.exports = {newDadosDataBase}
+module.exports = { newDadosDataBase, cleanDatabase };

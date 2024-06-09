@@ -6,6 +6,8 @@ const adm = `
 4. 🧹 **Limpar todos os produtos** - use o comando *limpar* para excluir todos os produtos.
 
 Escolha uma opção para começar a gerenciar seu inventário!
+
+caso escolha uma opcao digite novamente sua senha para reabrir o menu, obrigado.
 `;
 
 

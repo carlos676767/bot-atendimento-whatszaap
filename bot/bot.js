@@ -13,7 +13,7 @@ const genAI = new GoogleGenerativeAI(process.env.WHATSAPP_API_GEMINI);
 const creditos = require("./messages/creditos.js");
 const adm = require("./messages/admin/admin.cjs");
 const msgProduto = require("./messages/admin/msgAddProduto");
-const { newDadosDataBase } = require("../db/mongo.js");
+const { newDadosDataBase, cleanDatabase } = require("../db/mongo.js");
 const client = new Client({
   authStrategy: new LocalAuth(),
   webVersionCache: {
@@ -218,7 +218,12 @@ const menuAdmin = () => {
       msg.reply(adm);
       client.once("message", async (message) => {
         if (message.body.includes("add")) {
-       await addDadosDatabase(message)
+          await addDadosDatabase(message);
+          return;
+        }
+        if (message.body.includes("clean")) {
+          cleanDatabase();
+          return;
         }
       });
     }
@@ -232,6 +237,7 @@ async function addDadosDatabase(message) {
   console.log(novaStr);
   await newDadosDataBase(novaStr[0], novaStr[1]);
   message.reply(msgProduto(novaStr[0], novaStr[1]));
+
 }
 
 menuInicial();

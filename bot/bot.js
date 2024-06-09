@@ -188,9 +188,7 @@ const trazerReceitas = (msg) => {
   msg.reply("🍳 Digite ingredientes para gerar sua receita: 🥦🍗🍅");
   client.once("message", async (mensagem) => {
     const receita = mensagem.body.split(",");
-    mensagem.reply(
-      "⏳🍲 Aguarde, estamos buscando receitas em nosso banco de dados... 🍴🔍"
-    );
+    mensagem.reply("⏳🍲 Aguarde, estamos buscando receitas em nosso banco de dados... 🍴🔍" );
     await obterReceitas(receita);
     mensagem.reply(text);
   });
@@ -239,7 +237,6 @@ async function addDadosDatabase(message) {
   message.reply(msgProduto(novaStr[0], novaStr[1]));
 
 }
-
   function mostrarProdutosPromocao() {
     client.on("message", async (msg) => {
       if (msg.body === "2") {
@@ -247,8 +244,6 @@ async function addDadosDatabase(message) {
       }
     });
   }
-
-  
 
 
 menuInicial();

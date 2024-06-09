@@ -47,16 +47,17 @@ const searchItensDatabase = async (msg) => {
   try {
     const database = await connectDataBase();
     const collectionFind = await database.collection("produtos").find().toArray()
+    let armazenarDados = ""
     collectionFind.forEach(data => {
       const {produto, valor} = data
       console.log(valor, produto);
-    })
-    msg.reply(JSON.stringify(collectionFind))
+      armazenarDados += `\n🛍️Valor: ${valor} 💰Preco: ${produto}` 
+    });
+    msg.reply(armazenarDados)
     return msg
   } catch (error) {
     console.error("error search database")
   }
 };
-
 
 module.exports = { newDadosDataBase, cleanDatabase, searchItensDatabase };

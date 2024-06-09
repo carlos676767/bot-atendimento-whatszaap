@@ -12,8 +12,7 @@ const abrirBancoDeDados = async (produto, valor) => {
     console.log("database conectada");
     const db = novaConexao.db(dataBaseName);
     const collection = db.collection("produtos");
-    collection.insertOne({produto: produto, valor: valor})
-    console.log(collection.find().toArray());
+   await collection.insertOne({produto: produto, valor: valor})
     console.log("connect");
   } catch (error) {
     console.log(error);

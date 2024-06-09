@@ -13,7 +13,7 @@ const genAI = new GoogleGenerativeAI(process.env.WHATSAPP_API_GEMINI);
 const creditos = require("./messages/creditos.js");
 const adm = require("./messages/admin/admin.cjs");
 const dataBase = require("../db/mongo.js");
-
+const msgProduto = require("./messages/admin/msgAddProduto")
 const client = new Client({
   authStrategy: new LocalAuth(),
   webVersionCache: {
@@ -218,20 +218,20 @@ const menuAdmin = () => {
       msg.reply(adm);
       client.once("message", async (message) => {
         if (message.body.includes("add")) {
-          enviarProdutosDataBase(message);
+         await addDadosDatabase(message)
         }
       });
     }
   });
 };
 
-const enviarProdutosDataBase = async (message) => {
-  const pegarMnesagem = await message.getChat();
-  const { body } = pegarMnesagem.lastMessage;
-  const novaStr = body.slice(4, Infinity).split(" ");
-  await dataBase(novaStr[1], novaStr[2]);
-  message.reply("Produtos adicionados na database");
-};
+ async function addDadosDatabase(message) {
+   const pegarMnesagem = await message.getChat();
+   const { body } = pegarMnesagem.lastMessage;
+   const novaStr = body.slice(4, Infinity).split(" ");
+   await dataBase(novaStr[0], novaStr[1]);
+   await message.reply(msgProduto(novaStr[0], novaStr[1]));
+ }
 
 menuInicial();
 opcoes();

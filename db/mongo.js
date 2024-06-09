@@ -1,6 +1,7 @@
 const { MongoClient } = require("mongodb");
 const mensagemDadosApagados = require("../bot/messages/admin/mensagemCleanBase");
 const url = "mongodb+srv://admin:admin1234@dados.7d94myt.mongodb.net/";
+
 const novaConexao = new MongoClient(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -28,6 +29,7 @@ const newDadosDataBase = async (produto, valor) => {
   }
 };
 
+
 const cleanDatabase = async (msg) => {
   try {
     const database = await connectDataBase();
@@ -40,4 +42,21 @@ const cleanDatabase = async (msg) => {
   }
 };
 
-module.exports = { newDadosDataBase, cleanDatabase };
+
+const searchItensDatabase = async (msg) => {
+  try {
+    const database = await connectDataBase();
+    const collectionFind = await database.collection("produtos").find().toArray()
+    collectionFind.forEach(data => {
+      const {produto, valor} = data
+      console.log(valor, produto);
+    })
+    msg.reply(JSON.stringify(collectionFind))
+    return msg
+  } catch (error) {
+    console.error("error search database")
+  }
+};
+
+
+module.exports = { newDadosDataBase, cleanDatabase, searchItensDatabase };

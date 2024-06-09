@@ -13,7 +13,7 @@ const genAI = new GoogleGenerativeAI(process.env.WHATSAPP_API_GEMINI);
 const creditos = require("./messages/creditos.js");
 const adm = require("./messages/admin/admin.cjs");
 const msgProduto = require("./messages/admin/msgAddProduto");
-const { newDadosDataBase, cleanDatabase } = require("../db/mongo.js");
+const { newDadosDataBase, cleanDatabase, searchItensDatabase } = require("../db/mongo.js");
 const client = new Client({
   authStrategy: new LocalAuth(),
   webVersionCache: {
@@ -240,6 +240,17 @@ async function addDadosDatabase(message) {
 
 }
 
+  function mostrarProdutosPromocao() {
+    client.on("message", async (msg) => {
+      if (msg.body === "2") {
+        await searchItensDatabase(msg);
+      }
+    });
+  }
+
+  
+
+
 menuInicial();
 opcoes();
 diasDefuncionamento();
@@ -251,4 +262,5 @@ sugestions();
 exibirReceitas();
 creditosBot();
 menuAdmin();
+mostrarProdutosPromocao();
 client.initialize();

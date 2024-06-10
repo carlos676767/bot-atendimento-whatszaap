@@ -19,6 +19,7 @@ const {
   searchItensDatabase,
   updateItens,
 } = require("../db/mongo.js");
+const msgUpdateProduto = require("./messages/mensagemUpdatePreco.js");
 const client = new Client({
   authStrategy: new LocalAuth(),
   webVersionCache: {
@@ -226,7 +227,7 @@ const menuAdmin = () => {
           await addDadosDatabase(message);
           return;
         }
-        if (message.body.includes("clean")) {
+        if (message.body.includes("/resetar_produtos")) {
           await cleanDatabase(message);
           return;
         }
@@ -234,11 +235,8 @@ const menuAdmin = () => {
           const novaStr = message.body.slice(7, Infinity).split(" ");
           //valores para atualizar, novos valores
          await updateItens(novaStr[0], novaStr[1])
-          console.log(novaStr);
-          // valor antigo banana 23, novo valor.
-
-          //o indice 0 e 1 vao ser dos valores antigos, o 2 e o 3 sao os novos valores
-          return;
+         message.reply(msgUpdateProduto)
+         return;
         }
       });
     }

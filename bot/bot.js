@@ -223,7 +223,7 @@ const menuAdmin = () => {
     if (msg.body == process.env.SENHAADMIN) {
       msg.reply(adm);
       client.once("message", async (message) => {
-        if (message.body.includes("add")) {
+        if (message.body.includes("/adicionar_Produto")) {
           await addDadosDatabase(message);
           return;
         }
@@ -231,9 +231,8 @@ const menuAdmin = () => {
           await cleanDatabase(message);
           return;
         }
-        if (message.body.includes("editar")) {
-          const novaStr = message.body.slice(7, Infinity).split(" ");
-          //valores para atualizar, novos valores
+        if (message.body.includes("/editar")) {
+          const novaStr = message.body.slice(8, Infinity).split(" ");
          await updateItens(novaStr[0], novaStr[1])
          message.reply(msgUpdateProduto)
          return;
@@ -243,11 +242,10 @@ const menuAdmin = () => {
   });
 };
 
-
 async function addDadosDatabase(message) {
   const pegarMnesagem = await message.getChat();
   const { body } = pegarMnesagem.lastMessage;
-  const novaStr = body.slice(4, Infinity).split(" ");
+  const novaStr = body.slice(19, Infinity).split(" ");
   await newDadosDataBase(novaStr[0], novaStr[1]);
   message.reply(msgProduto(novaStr[0], novaStr[1]));
 }

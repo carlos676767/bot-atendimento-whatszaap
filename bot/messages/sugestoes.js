@@ -14,5 +14,4 @@ Atenciosamente,
 *Equipe Mercado Popular* 🛒
 `;
 
-module.exports = mensagemReclamacoesSugestoes
-
+module.exports = mensagemReclamacoesSugestoes;

@@ -13,7 +13,12 @@ const genAI = new GoogleGenerativeAI(process.env.WHATSAPP_API_GEMINI);
 const creditos = require("./messages/creditos.js");
 const adm = require("./messages/admin/admin.cjs");
 const msgProduto = require("./messages/admin/msgAddProduto");
-const { newDadosDataBase, cleanDatabase, searchItensDatabase } = require("../db/mongo.js");
+const {
+  newDadosDataBase,
+  cleanDatabase,
+  searchItensDatabase,
+  updateItens,
+} = require("../db/mongo.js");
 const client = new Client({
   authStrategy: new LocalAuth(),
   webVersionCache: {
@@ -188,7 +193,9 @@ const trazerReceitas = (msg) => {
   msg.reply("🍳 Digite ingredientes para gerar sua receita: 🥦🍗🍅");
   client.once("message", async (mensagem) => {
     const receita = mensagem.body.split(",");
-    mensagem.reply("⏳🍲 Aguarde, estamos buscando receitas em nosso banco de dados... 🍴🔍" );
+    mensagem.reply(
+      "⏳🍲 Aguarde, estamos buscando receitas em nosso banco de dados... 🍴🔍"
+    );
     await obterReceitas(receita);
     mensagem.reply(text);
   });
@@ -223,28 +230,36 @@ const menuAdmin = () => {
           await cleanDatabase(message);
           return;
         }
+        if (message.body.includes("editar")) {
+          const novaStr = message.body.slice(7, Infinity).split(" ");
+          //valores para atualizar, novos valores
+         await updateItens(novaStr[0], novaStr[1])
+          console.log(novaStr);
+          // valor antigo banana 23, novo valor.
+
+          //o indice 0 e 1 vao ser dos valores antigos, o 2 e o 3 sao os novos valores
+          return;
+        }
       });
     }
   });
 };
 
+
 async function addDadosDatabase(message) {
   const pegarMnesagem = await message.getChat();
   const { body } = pegarMnesagem.lastMessage;
   const novaStr = body.slice(4, Infinity).split(" ");
-  console.log(novaStr);
   await newDadosDataBase(novaStr[0], novaStr[1]);
   message.reply(msgProduto(novaStr[0], novaStr[1]));
-
 }
-  function mostrarProdutosPromocao() {
-    client.on("message", async (msg) => {
-      if (msg.body === "2") {
-        await searchItensDatabase(msg);
-      }
-    });
-  }
-
+function mostrarProdutosPromocao() {
+  client.on("message", async (msg) => {
+    if (msg.body === "2") {
+      await searchItensDatabase(msg);
+    }
+  });
+}
 
 menuInicial();
 opcoes();

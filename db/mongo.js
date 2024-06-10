@@ -13,7 +13,7 @@ const connectDataBase = async () => {
     await novaConexao.connect();
     const db = novaConexao.db(dataBaseName);
     console.log("database connect");
-    return db
+    return db;
   } catch (error) {
     console.error(`Database error connect from mongodb`);
   }
@@ -21,43 +21,53 @@ const connectDataBase = async () => {
 
 const newDadosDataBase = async (produto, valor) => {
   try {
-    const database = await connectDataBase()
+    const database = await connectDataBase();
     const collection = await database.collection("produtos");
-    await collection.insertOne({ produto: produto, valor: valor});
+    await collection.insertOne({ produto: produto, valor: valor });
   } catch (error) {
-    console.error("DataBase impossible itens add")
+    console.error("DataBase impossible itens add");
   }
 };
-
 
 const cleanDatabase = async (msg) => {
   try {
     const database = await connectDataBase();
     const collectionDrop = await database.collection("produtos").drop();
-    console.log("delete sucess database itens")
-    msg.reply(mensagemDadosApagados)
-    return msg
-    } catch (error) {
+    console.log("delete sucess database itens");
+    msg.reply(mensagemDadosApagados);
+    return msg;
+  } catch (error) {
     console.error("error delete database");
   }
 };
 
-
 const searchItensDatabase = async (msg) => {
   try {
     const database = await connectDataBase();
-    const collectionFind = await database.collection("produtos").find().toArray()
-    let armazenarDados = ""
-    collectionFind.forEach(data => {
-      const {produto, valor} = data
-      console.log(valor, produto);
-      armazenarDados += `\n🛍️Valor: ${valor} 💰Preco: ${produto}` 
+    const collectionFind = await database.collection("produtos").find().toArray();
+    let armazenarDados = "";
+    collectionFind.forEach((data) => {
+      const { produto, valor } = data;
+      armazenarDados += `\n🛍️ Valor: ${valor} 💰Preco: ${produto}`;
     });
-    msg.reply(armazenarDados)
-    return msg
+    msg.reply(armazenarDados);
+    return msg;
   } catch (error) {
-    console.error("error search database")
+    console.error("error search database");
   }
 };
 
-module.exports = { newDadosDataBase, cleanDatabase, searchItensDatabase };
+const updateItens = async (nome, preco) => {
+  try {
+    const databaseConnect = await connectDataBase()
+    const collection = await databaseConnect.collection("produtos")
+    const filterItens = await collection.updateOne({ produto: nome }, { $set: { valor: preco  } })
+    console.log(filterItens)
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+module.exports = { newDadosDataBase, cleanDatabase, searchItensDatabase, updateItens };

@@ -1,5 +1,5 @@
 const mensagemDadosApagados = `
-🧹 **Operação de Limpeza Completa!**
+🧹 *Operação de Limpeza Completa!*
 
 Todos os dados da sua database foram apagados com sucesso.
 

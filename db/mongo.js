@@ -1,5 +1,6 @@
 const { MongoClient } = require("mongodb");
 const mensagemDadosApagados = require("../bot/messages/admin/mensagemCleanBase");
+const { error } = require("qrcode-terminal");
 const url = "mongodb+srv://admin:admin1234@dados.7d94myt.mongodb.net/";
 
 const novaConexao = new MongoClient(url, {
@@ -19,11 +20,11 @@ const connectDataBase = async () => {
   }
 };
 
-const newDadosDataBase = async (produto, valor) => {
+const newDadosDataBase = async (name, value, msg) => {
   try {
     const database = await connectDataBase();
     const collection = await database.collection("produtos");
-    await collection.insertOne({ produto: produto, valor: valor });
+    await collection.insertOne({ produto: name, valor: value });
   } catch (error) {
     console.error("DataBase impossible itens add");
   }

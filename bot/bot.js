@@ -217,24 +217,10 @@ const menuAdmin = () => {
     if (msg.body == process.env.SENHAADMIN) {
       msg.reply(adm);
       client.once("message", async (message) => {
-      await databaseNewDados()
-
-        if (message.body.includes("/resetar_produtos")) {
-          await cleanDatabase(message);
-          return;
-        }
-
-        if (message.body.includes("/editar")) {
-          const novaStr = message.body.slice(8, Infinity).split(" ");
-          await updateItens(novaStr[0], novaStr[1]);
-          message.reply(msgUpdateProduto);
-          return;
-        }
-        if (message.body.includes("/deleteItem")) {
-          const novaStr = message.body.slice(12, Infinity).split(" ");
-          await deletarItem(novaStr[0]);
-          message.reply(deleteItem(novaStr[0]))
-        }
+      await databaseNewDados(message);
+      await apagarProdutoDatabase(message);
+      await editarDatabase(message);
+      await deletarProdutosDatabase(message);
       });
     }
   });
@@ -248,12 +234,42 @@ const databaseNewDados = async(message) => {
   }
 }
 
+const apagarProdutoDatabase = async (message) => {
+  if (message.body.includes("/resetar_produtos")) {
+    await cleanDatabase(message);
+    return;
+  }
+};
+
+
+const editarDatabase = async(message) => {
+  if (message.body.includes("/editar")) {
+    const novaStr = message.body.slice(8).split(" ")
+    console.log(novaStr);
+    await updateItens(novaStr[0], novaStr[1]);
+    message.reply(msgUpdateProduto);
+    return;
+  }
+}
+
+const deletarProdutosDatabase = async (message) => {
+  if (message.body.includes("/deleteItem")) {
+    const novaStr = message.body.slice(12, Infinity).split(" ");
+    await deletarItem(novaStr[0]);
+    message.reply(deleteItem(novaStr[0]));
+  }
+};
+
 async function addDadosDatabase(message) {
   const pegarMnesagem = await message.getChat();
   const { body } = pegarMnesagem.lastMessage;
   const novaStr = body.slice(19, Infinity).split(" ");
-  await newDadosDataBase(novaStr[0], novaStr[1]);
-  message.reply(msgProduto(novaStr[0], novaStr[1]));
+  if (novaStr[0] == "") {
+    message.reply("*⛔ valor esta vazio, digite os valores para proseguir ⛔*");
+  } else {
+    await newDadosDataBase(novaStr[0], novaStr[1], message);
+    message.reply(msgProduto(novaStr[0], novaStr[1]));
+  }
 }
 function mostrarProdutosPromocao() {
   client.on("message", async (msg) => {
@@ -262,6 +278,8 @@ function mostrarProdutosPromocao() {
     }
   });
 }
+
+
 
 menuInicial();
 opcoes();

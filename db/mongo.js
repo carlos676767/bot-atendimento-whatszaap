@@ -47,11 +47,17 @@ const searchItensDatabase = async (msg) => {
     const database = await connectDataBase();
     const collectionFind = await database.collection("produtos").find().toArray();
     let armazenarDados = "";
-    collectionFind.forEach((data) => {
-      const { produto, valor } = data;
-      armazenarDados += `\n🛍️ Valor: ${valor} 💰Preco: ${produto}`;
-    });
-    msg.reply(armazenarDados);
+    console.log(collectionFind);
+    if (collectionFind.length == []) {
+      msg.reply("*🛍️ Infelizmente não ha produtos em promoção, volte novamente mais tarde*")
+    }else{
+      collectionFind.forEach((data) => {
+        const { produto, valor } = data;
+        armazenarDados += `\n 🛍️Nome: ${produto} 💰Valor: ${valor}`;
+      });
+      msg.reply(`*🎁 Produtos em promoção - MP*\n ${armazenarDados}`);
+    }
+
     return msg;
   } catch (error) {
     console.error("error search database");

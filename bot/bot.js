@@ -173,6 +173,7 @@ const sugestions = () => {
   });
 };
 
+
 let text = "";
 async function obterReceitas(valor) {
   try {
@@ -203,6 +204,7 @@ const exibirReceitas = () => {
     }
   });
 };
+
 
 const creditosBot = () => {
   client.on("message", (msg) => {
@@ -245,7 +247,6 @@ const apagarProdutoDatabase = async (message) => {
 const editarDatabase = async(message) => {
   if (message.body.includes("/editar")) {
     const novaStr = message.body.slice(8).split(" ")
-    console.log(novaStr);
     await updateItens(novaStr[0], novaStr[1]);
     message.reply(msgUpdateProduto);
     return;
@@ -271,6 +272,8 @@ async function addDadosDatabase(message) {
     message.reply(msgProduto(novaStr[0], novaStr[1]));
   }
 }
+
+
 function mostrarProdutosPromocao() {
   client.on("message", async (msg) => {
     if (msg.body === "2") {
@@ -278,8 +281,6 @@ function mostrarProdutosPromocao() {
     }
   });
 }
-
-
 
 menuInicial();
 opcoes();

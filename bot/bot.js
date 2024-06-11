@@ -13,14 +13,9 @@ const genAI = new GoogleGenerativeAI(process.env.WHATSAPP_API_GEMINI);
 const creditos = require("./messages/creditos.js");
 const adm = require("./messages/admin/admin.cjs");
 const msgProduto = require("./messages/admin/msgAddProduto");
-const {
-  newDadosDataBase,
-  cleanDatabase,
-  searchItensDatabase,
-  updateItens,
-  deletarItem,
-} = require("../db/mongo.js");
+const { newDadosDataBase,cleanDatabase,searchItensDatabase,updateItens, deletarItem,} = require("../db/mongo.js");
 const msgUpdateProduto = require("./messages/mensagemUpdatePreco.js");
+const deleteItem = require("./messages/admin/msgDeleteItem.js");
 const client = new Client({
   authStrategy: new LocalAuth(),
   webVersionCache: {
@@ -195,9 +190,7 @@ const trazerReceitas = (msg) => {
   msg.reply("🍳 Digite ingredientes para gerar sua receita: 🥦🍗🍅");
   client.once("message", async (mensagem) => {
     const receita = mensagem.body.split(",");
-    mensagem.reply(
-      "⏳🍲 Aguarde, estamos buscando receitas em nosso banco de dados... 🍴🔍"
-    );
+    mensagem.reply("⏳🍲 Aguarde, estamos buscando receitas em nosso banco de dados... 🍴🔍" );
     await obterReceitas(receita);
     mensagem.reply(text);
   });
@@ -232,22 +225,22 @@ const menuAdmin = () => {
           await cleanDatabase(message);
           return;
         }
+
         if (message.body.includes("/editar")) {
           const novaStr = message.body.slice(8, Infinity).split(" ");
-         await updateItens(novaStr[0], novaStr[1])
-         message.reply(msgUpdateProduto)
-         return;
+          await updateItens(novaStr[0], novaStr[1]);
+          message.reply(msgUpdateProduto);
+          return;
         }
         if (message.body.includes("/deleteItem")) {
           const novaStr = message.body.slice(12, Infinity).split(" ");
-          console.log(novaStr);
-          await deletarItem(novaStr[0])
+          await deletarItem(novaStr[0]);
+          message.reply(deleteItem(novaStr[0]))
         }
       });
     }
   });
 };
-
 
 async function addDadosDatabase(message) {
   const pegarMnesagem = await message.getChat();

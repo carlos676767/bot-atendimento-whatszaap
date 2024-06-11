@@ -217,10 +217,8 @@ const menuAdmin = () => {
     if (msg.body == process.env.SENHAADMIN) {
       msg.reply(adm);
       client.once("message", async (message) => {
-        if (message.body.includes("/adicionar_Produto")) {
-          await addDadosDatabase(message);
-          return;
-        }
+      await databaseNewDados()
+
         if (message.body.includes("/resetar_produtos")) {
           await cleanDatabase(message);
           return;
@@ -241,6 +239,14 @@ const menuAdmin = () => {
     }
   });
 };
+
+
+const databaseNewDados = async(message) => {
+  if (message.body.includes("/adicionar_Produto")) {
+    await addDadosDatabase(message);
+    return;
+  }
+}
 
 async function addDadosDatabase(message) {
   const pegarMnesagem = await message.getChat();

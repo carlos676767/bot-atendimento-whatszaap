@@ -62,12 +62,22 @@ const updateItens = async (nome, preco) => {
     const databaseConnect = await connectDataBase()
     const collection = await databaseConnect.collection("produtos")
     const filterItens = await collection.updateOne({ produto: nome }, { $set: { valor: preco  } })
-    console.log(filterItens)
+    console.log('item updated successfully')
   } catch (error) {
-    console.log(error);
+    console.log("error when updating item");
+  }
+};
+
+const deletarItem = async (nome) => {
+  try {
+    const databaseConnect = await connectDataBase();
+    const collection = await databaseConnect.collection("produtos")
+    const deleteValue = await collection.deleteOne({ produto: nome });
+    console.log(deleteValue);
+  } catch (error) {
+    console.error("error delete item from mongo db")
   }
 };
 
 
-
-module.exports = { newDadosDataBase, cleanDatabase, searchItensDatabase, updateItens };
+module.exports = { newDadosDataBase, cleanDatabase, searchItensDatabase, updateItens, deletarItem };

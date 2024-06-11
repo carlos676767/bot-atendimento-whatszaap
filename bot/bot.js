@@ -18,6 +18,7 @@ const {
   cleanDatabase,
   searchItensDatabase,
   updateItens,
+  deletarItem,
 } = require("../db/mongo.js");
 const msgUpdateProduto = require("./messages/mensagemUpdatePreco.js");
 const client = new Client({
@@ -237,10 +238,16 @@ const menuAdmin = () => {
          message.reply(msgUpdateProduto)
          return;
         }
+        if (message.body.includes("/deleteItem")) {
+          const novaStr = message.body.slice(12, Infinity).split(" ");
+          console.log(novaStr);
+          await deletarItem(novaStr[0])
+        }
       });
     }
   });
 };
+
 
 async function addDadosDatabase(message) {
   const pegarMnesagem = await message.getChat();

@@ -6,8 +6,7 @@ function addProdutos(nome, produto) {
 *- ${nome}*
 *- ${produto}*
 
-*Verifique a lista de produtos atualizada para mais detalhes. Obrigado por utilizar o sistema de administração!*
-`;
+*Verifique a lista de produtos atualizada para mais detalhes. Obrigado por utilizar o sistema de administração!*`
   return mensagemProdutosAdicionados;
 }
 

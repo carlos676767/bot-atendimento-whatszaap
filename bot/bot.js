@@ -16,6 +16,7 @@ const msgProduto = require("./messages/admin/msgAddProduto");
 const { newDadosDataBase,cleanDatabase,searchItensDatabase,updateItens, deletarItem,} = require("../db/mongo.js");
 const msgUpdateProduto = require("./messages/mensagemUpdatePreco.js");
 const deleteItem = require("./messages/admin/msgDeleteItem.js");
+const gerarSenha = require("./messages/admin/sendEmail.js");
 const client = new Client({
   authStrategy: new LocalAuth(),
   webVersionCache: {
@@ -28,9 +29,14 @@ const client = new Client({
   },
 });
 
-client.on("ready", () => {
+let pass
+client.on("ready",() => {
+  gerarSenha(senha => {
+  pass = senha
+  })
   console.log("bot online!");
 });
+
 
 client.on("qr", (qr) => {
   qrcode.generate(qr, { small: true });
@@ -97,21 +103,10 @@ const opcoes = async () => {
       return;
     }
     if (msg.body >= "10" && msg.body <= "17") {
-      const opcoes = {
-        10: "FrioseLticínios",
-        11: "Carnes",
-        12: "Hortifruti",
-        13: "Padaria",
-        14: "Bebidas",
-        15: "EnlatadoseConservas",
-        16: "CereaiseGrãos",
-        17: "Massas",
-      };
+      const opcoes = {  10: "FrioseLticínios", 11: "Carnes",  12: "Hortifruti",  13: "Padaria",  14: "Bebidas", 15: "EnlatadoseConservas",16: "CereaiseGrãos", 17: "Massas",  };
       const options = opcoes[msg.body];
       const produtos = buscarProdutos(options);
-      msg.reply(
-        `*MP - Confira ja nossos valores*\n ${produtos} \n\n Gostou de alguma oferta ? venha nos visitar,\n\n ${locacaliao} `
-      );
+      msg.reply(`*MP - Confira ja nossos valores*\n ${produtos} \n\n Gostou de alguma oferta ? venha nos visitar,\n\n ${locacaliao} `);
     }
   });
 };
@@ -214,9 +209,12 @@ const creditosBot = () => {
   });
 };
 
+
+
 const menuAdmin = () => {
   client.on("message", (msg) => {
-    if (msg.body == process.env.SENHAADMIN) {
+
+    if (msg.body == pass) {
       msg.reply(adm);
       client.once("message", async (message) => {
       await databaseNewDados(message);
@@ -227,7 +225,6 @@ const menuAdmin = () => {
     }
   });
 };
-
 
 const databaseNewDados = async(message) => {
   if (message.body.includes("/adicionar_Produto")) {
@@ -242,7 +239,6 @@ const apagarProdutoDatabase = async (message) => {
     return;
   }
 };
-
 
 const editarDatabase = async(message) => {
   if (message.body.includes("/editar")) {
@@ -264,7 +260,7 @@ const deletarProdutosDatabase = async (message) => {
 async function addDadosDatabase(message) {
   const pegarMnesagem = await message.getChat();
   const { body } = pegarMnesagem.lastMessage;
-  const novaStr = body.slice(19, Infinity).split(" ");
+  const novaStr = body.slice(19).split(" ");
   if (novaStr[0] == "") {
     message.reply("*⛔ valor esta vazio, digite os valores para proseguir ⛔*");
   } else {
@@ -272,7 +268,6 @@ async function addDadosDatabase(message) {
     message.reply(msgProduto(novaStr[0], novaStr[1]));
   }
 }
-
 
 function mostrarProdutosPromocao() {
   client.on("message", async (msg) => {

@@ -1,2 +1,0 @@
-ignorar espacos no comando /editar
-VERFICAR SE HA VALORES NA DATABASE

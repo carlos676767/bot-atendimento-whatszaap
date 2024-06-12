@@ -1,6 +1,5 @@
 const { MongoClient } = require("mongodb");
 const mensagemDadosApagados = require("../bot/messages/admin/mensagemCleanBase");
-const { error } = require("qrcode-terminal");
 const url = "mongodb+srv://admin:admin1234@dados.7d94myt.mongodb.net/";
 
 const novaConexao = new MongoClient(url, {
@@ -30,6 +29,7 @@ const newDadosDataBase = async (name, value, msg) => {
   }
 };
 
+
 const cleanDatabase = async (msg) => {
   try {
     const database = await connectDataBase();
@@ -57,7 +57,6 @@ const searchItensDatabase = async (msg) => {
       });
       msg.reply(`*🎁 Produtos em promoção - MP*\n ${armazenarDados}`);
     }
-
     return msg;
   } catch (error) {
     console.error("error search database");
@@ -65,12 +64,12 @@ const searchItensDatabase = async (msg) => {
 };
 
 const updateItens = async (nome, preco) => {
-  try {
+  try{
     const databaseConnect = await connectDataBase()
     const collection = await databaseConnect.collection("produtos")
     const filterItens = await collection.updateOne({ produto: nome }, { $set: { valor: preco  } })
     console.log('item updated successfully')
-  } catch (error) {
+  }catch (error) {
     console.log("error when updating item");
   }
 };
@@ -85,6 +84,5 @@ const deletarItem = async (nome) => {
     console.error("error delete item from mongo db")
   }
 };
-
 
 module.exports = { newDadosDataBase, cleanDatabase, searchItensDatabase, updateItens, deletarItem };
